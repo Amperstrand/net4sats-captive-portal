@@ -1,7 +1,7 @@
 // tollgate host
 // replace this if your are not developing the tollgate captive portal directly on a tollgate
 // export const currentHost = "10.50.184.1";
-const currentHost = window.location.hostname;
+const currentHost = import.meta.env.VITE_TOLLGATE_HOST || window.location.hostname;
 
 // get the base url dynamically
 export const getTollgateBaseUrl = () => {
@@ -238,7 +238,7 @@ export const formatTimeInSeconds = (milliseconds, abbreviate, i18n) => {
 export const formatDataSize = (Bytes, i18n) => {
   // show value in kib, mb, or gb depending on size
 
-    if (Bytes < 1024) {
+  if (Bytes < 1024) {
     // less than 1 mb
     return {
       value: Bytes,
@@ -247,19 +247,19 @@ export const formatDataSize = (Bytes, i18n) => {
   } else if (Bytes < 1048576) {
     // less than 1 mb
     return {
-      value: Bytes,
-      unit: i18n("KiB").toFixed(1),
+      value: (Bytes / 1024).toFixed(1),
+      unit: i18n("KiB"),
     };
   } else if (Bytes < 1073741824) {
     // less than 1 gb
     return {
       value: (Bytes / 1048576).toFixed(2),
-      unit: i18n("MiB"),
+      unit: i18n("MB"),
     };
   } else {
     return {
       value: (Bytes / 1073741824).toFixed(3),
-      unit: i18n("GiB"),
+      unit: i18n("GB"),
     };
   }
 };
