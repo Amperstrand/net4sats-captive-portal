@@ -103,7 +103,7 @@ export const App = () => {
         <div className="tollgate-captive-portal-content">
           <div className="tollgate-captive-portal-content-container">
 
-            <div className="tollgate-captive-portal-tabs" aria-label={t('tab_aria_label')}>
+            <div className="tollgate-captive-portal-tabs" aria-label={t('tab_aria_label')} data-hidden={!loading && !!error}>
               <Tab type="cashu" method={method} setMethod={setMethod} />
               <Tab type="lightning" method={method} setMethod={setMethod} />
             </div>
@@ -111,8 +111,20 @@ export const App = () => {
             <div className="tollgate-captive-portal-view">
               {loading && <Loading />}
 
-              {!loading && error && <div className="tollgate-captive-portal-error">
+              {!loading && error && error.isBackendNotice && <div className="tollgate-captive-portal-error">
                 <Error label={error.label} code={error.code} message={error.message} />
+                {retrying && <div className="tollgate-captive-portal-retrying">
+                  <span className="spinner"></span>
+                  {t('retrying')}
+                </div>}
+              </div>}
+
+              {!loading && error && !error.isBackendNotice && <div className="tollgate-captive-portal-error">
+                <Error label={error.label} code={error.code} message={error.message} />
+                {retrying && <div className="tollgate-captive-portal-retrying">
+                  <span className="spinner"></span>
+                  {t('retrying')}
+                </div>}
               </div>}
 
               {/* show cashu or lightning method based on selection */}
@@ -238,7 +250,7 @@ export const AccessOptions = ({ pricingInfo, selectedMint, setSelectedMint }) =>
   const { t } = useTranslation();
   return <>
     {/* render a button for each available mint option */}
-    {pricingInfo.length && pricingInfo.map(mint => {
+    {pricingInfo.length > 0 && pricingInfo.map(mint => {
       if (!mint.price || !mint.url) return null;
       let mintAddressStripped = mint.url.replace('https://', '');
       mintAddressStripped = mintAddressStripped.replace('http://', '');
