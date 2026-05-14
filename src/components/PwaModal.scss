@@ -12,7 +12,7 @@
 
 .tollgate-captive-portal-pwa-card {
   position: relative;
-  background-color: #111;
+  background-color: var(--color-black);
   border: .15rem solid rgba(255, 255, 255, .1);
   border-radius: var(--border-radius-large);
   padding: 2.5rem 2rem 2rem;
@@ -81,7 +81,7 @@
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 50%;
-    background-color: #f60;
+    background-color: var(--color-cta);
     color: var(--color-white);
     font-size: var(--font-size-small);
     font-weight: 700;

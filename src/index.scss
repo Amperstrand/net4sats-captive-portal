@@ -50,7 +50,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #080e1d;
+  background-color: var(--color-brand-bg, #080e1d);
   color: var(--color-white);
 }
 

@@ -34,13 +34,13 @@
     width: auto;
 
     &:hover {
-      background-color: rgba(255, 102, 0, .25);
-      border-color: rgba(255, 102, 0, .5);
+      background-color: var(--color-cta-hover, rgba(255, 102, 0, .25));
+      border-color: var(--color-cta-hover-border, rgba(255, 102, 0, .5));
     }
 
     &.active {
-      background-color: #f60;
-      border-color: #f60;
+      background-color: var(--color-cta);
+      border-color: var(--color-cta);
       color: var(--color-white);
       font-weight: 600;
     }

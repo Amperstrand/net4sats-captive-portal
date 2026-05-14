@@ -1,9 +1,6 @@
-// external
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import classNames from 'classnames';
-
-// internal
 import Background from './components/Background.jsx'
 import Cashu from './components/Cashu.jsx'
 import Lightning from './components/Lightning.jsx'
@@ -11,18 +8,13 @@ import SizeSelector from './components/SizeSelector.jsx'
 import PwaModal from './components/PwaModal.jsx'
 import { Error } from './components/Status.jsx';
 import { AccessGrantedIcon, RadioButtonIcon } from './components/Icon.jsx'
-
-// helpers
 import { fetchTollgateData, getStepSizeValues } from './helpers/tollgate.js'
-
-// styles and assets
+import { useTheme } from './theme/ThemeProvider';
 import './App.scss'
 
-const NET4SATS_LOGO = 'https://net4sats.cash/assets/logo/colour/net4sats-logo-colour.png';
-
-// main component
 export const App = () => {
   const { t, ready } = useTranslation();
+  const theme = useTheme();
   const [method, setMethod] = useState('cashu');
   const [tollgateDetails, setTollgateDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -100,10 +92,10 @@ export const App = () => {
       <Background />
 
       <div className="tollgate-captive-portal-interface">
-        <PwaModal />
+        {theme.features.pwaModal && <PwaModal />}
         <Header />
 
-        {!loading && !error && tollgateDetails && <SizeSelector
+        {!loading && !error && tollgateDetails && theme.features.sizeSelector && <SizeSelector
           tollgateDetails={tollgateDetails.value}
           selectedAmount={selectedAmount}
           setSelectedAmount={setSelectedAmount}
@@ -139,12 +131,12 @@ export const App = () => {
   );
 }
 
-// header component showing net4sats logo above container
 export const Header = () => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return <div className="tollgate-captive-portal-header">
-    <img src={NET4SATS_LOGO} alt={t('header_image_alt')}></img>
+    <img src={theme.brand.logo} alt={t('header_image_alt')}></img>
   </div>
 }
 
@@ -235,10 +227,10 @@ export const AccessGranted = ({ allocation }) => {
   </div>
 }
 
-// footer component below container
 export const Footer = () => {
+  const theme = useTheme();
   return <div className="tollgate-captive-portal-footer">
-    <p>net4sats · Powered by <a href="https://tollgate.me/" target="_blank" rel="noreferrer">TollGate</a></p>
+    <p>{theme.brand.name} · Powered by <a href={theme.brand.poweredByUrl} target="_blank" rel="noreferrer">{theme.brand.poweredByText}</a></p>
   </div>
 }
 

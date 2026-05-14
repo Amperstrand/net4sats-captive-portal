@@ -12,5 +12,5 @@
   z-index: 0;
   pointer-events: none;
   background: #1a1a2e;
-  background: radial-gradient(circle, #181836 0%, #080e1d 100%);
+  background: radial-gradient(circle, #181836 0%, var(--color-brand-bg, #080e1d) 100%);
 }

@@ -1,17 +1,28 @@
-// external
 import React, { useEffect, useRef } from 'react';
-
-// styles and assets
+import { useTheme } from '../theme/ThemeProvider';
 import './Background.scss';
 
-// main component for animated background
+function hexToRgb(hex) {
+  if (!hex) return null;
+  let match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!match) {
+    match = /^#?([a-f\d])([a-f\d])([a-f\d])$/i.exec(hex);
+    if (match) {
+      match = [match[0], match[1] + match[1], match[2] + match[2], match[3] + match[3]];
+    }
+  }
+  if (!match) return null;
+  return `${parseInt(match[1], 16)}, ${parseInt(match[2], 16)}, ${parseInt(match[3], 16)}`;
+}
+
 const Background = () => {
-  // reference to the canvas element
   const canvasRef = useRef(null);
+  const theme = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+    const lineRgb = hexToRgb(theme.colors.particleLine) || '255, 255, 255';
 
     // particle class for the moving light effect
     class Particle {
@@ -104,7 +115,7 @@ const Background = () => {
 
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(255, 102, 0, ${0.2 - distance / 500})`;
+            ctx.strokeStyle = `rgba(${lineRgb}, ${0.2 - distance / 500})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
@@ -118,11 +129,10 @@ const Background = () => {
 
     animate();
 
-    // cleanup event listener on unmount
     return () => {
       window.removeEventListener('resize', reinit);
     };
-  }, []);
+  }, [theme]);
 
   // render the canvas element for the animated background
   return <canvas ref={canvasRef} className="tollgate-captive-portal-background"></canvas>

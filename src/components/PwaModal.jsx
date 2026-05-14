@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useTheme } from '../theme/ThemeProvider';
 import './PwaModal.scss';
 
 const PwaModal = () => {
   const [visible, setVisible] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     const seen = sessionStorage.getItem('pwa-seen');
@@ -30,12 +32,12 @@ const PwaModal = () => {
 
         <img
           className="tollgate-captive-portal-pwa-icon"
-          src="https://net4sats.cash/assets/icon/white/net4sats-icon-white.png"
-          alt="net4sats"
+          src={theme.brand.icon}
+          alt={theme.brand.name}
         />
 
         <h2 className="tollgate-captive-portal-pwa-title">Add to Home Screen</h2>
-        <p className="tollgate-captive-portal-pwa-subtitle">Install net4sats for quick access to your internet portal</p>
+        <p className="tollgate-captive-portal-pwa-subtitle">Install {theme.brand.name} for quick access to your internet portal</p>
 
         <div className="tollgate-captive-portal-pwa-steps">
           <div className="tollgate-captive-portal-pwa-step">
