@@ -7,6 +7,8 @@ import classNames from 'classnames';
 import Background from './components/Background.jsx'
 import Cashu from './components/Cashu.jsx'
 import Lightning from './components/Lightning.jsx'
+import SizeSelector from './components/SizeSelector.jsx'
+import PwaModal from './components/PwaModal.jsx'
 import { Error } from './components/Status.jsx';
 import { AccessGrantedIcon, RadioButtonIcon } from './components/Icon.jsx'
 
@@ -16,8 +18,7 @@ import { fetchTollgateData, getStepSizeValues } from './helpers/tollgate.js'
 // styles and assets
 import './App.scss'
 
-// import the tollgate logos
-import logoWhite from './assets/logo/TollGate_Logo-C-white.png';
+const NET4SATS_LOGO = 'https://net4sats.cash/assets/logo/colour/net4sats-logo-colour.png';
 
 // main component
 export const App = () => {
@@ -29,6 +30,7 @@ export const App = () => {
   const [deviceInfo, setDeviceInfo] = useState(null);
   const [retrying, setRetrying] = useState(false);
   const retryIntervalRef = useRef(null);
+  const [selectedAmount, setSelectedAmount] = useState(null);
 
   // initial data fetch on translation ready
   useEffect(() => {
@@ -98,7 +100,14 @@ export const App = () => {
       <Background />
 
       <div className="tollgate-captive-portal-interface">
+        <PwaModal />
         <Header />
+
+        {!loading && !error && tollgateDetails && <SizeSelector
+          tollgateDetails={tollgateDetails.value}
+          selectedAmount={selectedAmount}
+          setSelectedAmount={setSelectedAmount}
+        />}
 
         <div className="tollgate-captive-portal-content">
           <div className="tollgate-captive-portal-content-container">
@@ -116,8 +125,8 @@ export const App = () => {
               </div>}
 
               {/* show cashu or lightning method based on selection */}
-              {!loading && !error && method === 'cashu' && <Cashu tollgateDetails={tollgateDetails.value} />}
-              {!loading && !error && method === 'lightning' && <Lightning tollgateDetails={tollgateDetails.value} />}
+              {!loading && !error && method === 'cashu' && <Cashu tollgateDetails={tollgateDetails.value} selectedAmount={selectedAmount} />}
+              {!loading && !error && method === 'lightning' && <Lightning tollgateDetails={tollgateDetails.value} selectedAmount={selectedAmount} />}
             </div>
 
           </div>
@@ -130,12 +139,12 @@ export const App = () => {
   );
 }
 
-// header component showing tollgate logo above container
+// header component showing net4sats logo above container
 export const Header = () => {
   const { t } = useTranslation();
 
   return <div className="tollgate-captive-portal-header">
-    <img src={logoWhite} alt={t('header_image_alt')}></img>
+    <img src={NET4SATS_LOGO} alt={t('header_image_alt')}></img>
   </div>
 }
 
@@ -229,7 +238,7 @@ export const AccessGranted = ({ allocation }) => {
 // footer component below container
 export const Footer = () => {
   return <div className="tollgate-captive-portal-footer">
-    <p><Trans i18nKey="powered_by" components={{ 1: <a href="https://tollgate.me/" target="_blank" rel="noreferrer"></a> }} /></p>
+    <p>net4sats · Powered by <a href="https://tollgate.me/" target="_blank" rel="noreferrer">TollGate</a></p>
   </div>
 }
 

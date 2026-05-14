@@ -21,7 +21,7 @@ import './Lightning.scss'
 // main component for handling lightning payments
 export const Lightning = (props) => {
   const { t } = useTranslation();
-  const { tollgateDetails } = props;
+  const { tollgateDetails, selectedAmount } = props;
   // state for payment flow and user input
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -71,9 +71,9 @@ export const Lightning = (props) => {
   // handle mint change
   useEffect(() => {
     if (selectedMint) {
-      setUnitAmount(selectedMint.price)
+      setUnitAmount(selectedAmount || selectedMint.price)
     }
-  }, [selectedMint])
+  }, [selectedMint, selectedAmount])
 
   // handle processing change
   useEffect(() => {

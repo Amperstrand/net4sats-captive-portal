@@ -12,14 +12,14 @@
   --font-size-medium: clamp(1.6rem, .3205vw + 1.4718rem, 1.8rem); /* 400px = 16px to 1024px = 18px */
   --font-size-large: clamp(1.8rem, .3205vw + 1.6718rem, 2rem); /* 400px = 18px to 1024px = 20px */
 
-  --color-black: #000000;
+  --color-black: #111;
   --color-black-transparent: rgba(0,0,0,0.90);
 
-  --color: #171D35;
+  --color: #fff;
   --color-negative: #959CB1;
   
-  --color-cta: #FFB54C;
-  --color-cta-transparent: rgba(255, 181, 76, .8);
+  --color-cta: #f60;
+  --color-cta-transparent: rgba(255, 102, 0, .8);
 
   --color-white: #ffffff;
   --color-white-transparent: rgba(255,255,255,0.90);

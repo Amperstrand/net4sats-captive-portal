@@ -1,0 +1,87 @@
+.tollgate-captive-portal-size-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0 1.5rem;
+  margin-bottom: 1.5rem;
+
+  &-heading {
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  &-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    justify-content: center;
+  }
+
+  &-pill {
+    appearance: none;
+    padding: .6rem 1.4rem;
+    border-radius: 5rem;
+    border: .15rem solid rgba(255, 255, 255, .15);
+    background-color: rgba(255, 255, 255, .08);
+    color: var(--color-white);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color .15s, border-color .15s, color .15s;
+    width: auto;
+
+    &:hover {
+      background-color: rgba(255, 102, 0, .25);
+      border-color: rgba(255, 102, 0, .5);
+    }
+
+    &.active {
+      background-color: #f60;
+      border-color: #f60;
+      color: var(--color-white);
+      font-weight: 600;
+    }
+  }
+
+  &-custom {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    background: rgba(255, 255, 255, .08);
+    border: .15rem solid rgba(255, 255, 255, .15);
+    border-radius: var(--border-radius);
+    padding: .4rem .8rem;
+    width: 100%;
+    max-width: 24rem;
+
+    &-input {
+      appearance: none;
+      background: transparent;
+      border: none;
+      color: var(--color-white);
+      font-size: var(--font-size);
+      font-weight: 500;
+      width: 100%;
+      padding: 0;
+      outline: none;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, .4);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-unit {
+      color: rgba(255, 255, 255, .5);
+      font-size: var(--font-size-small);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+  }
+}

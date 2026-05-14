@@ -104,7 +104,7 @@ const Background = () => {
 
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - distance / 500})`;
+            ctx.strokeStyle = `rgba(255, 102, 0, ${0.2 - distance / 500})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);

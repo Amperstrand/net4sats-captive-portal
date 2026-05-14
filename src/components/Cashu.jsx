@@ -21,7 +21,7 @@ import './Cashu.scss'
 // main component for cashu payment method
 export const Cashu = (props) => {
   const { t } = useTranslation();
-  const { tollgateDetails } = props;
+  const { tollgateDetails, selectedAmount } = props;
   // state for user input and payment flow
   const [token, setToken] = useState('');
   const [tokenValue, setTokenValue] = useState(null);
@@ -59,6 +59,7 @@ export const Cashu = (props) => {
   // handle token change: validate and calculate allocation
   useEffect(() => {
     if (token) {
+      const requiredAmount = selectedAmount || (selectedMint ? selectedMint.price : 0);
       const validation = validateToken(token, selectedMint, t);
       if (!validation.status) {
         setError(validation)
@@ -66,7 +67,7 @@ export const Cashu = (props) => {
       } else {
         setTokenValue(validation.value)
         setAllocation(calculateAllocation(validation.value.amount, selectedMint, t))
-        if (validation.value.amount < selectedMint.price) {
+        if (validation.value.amount < requiredAmount) {
           setError({
             status: 0,
             code: 'CU002',
@@ -82,7 +83,7 @@ export const Cashu = (props) => {
       setAllocation(null)
       setError(null)
     }
-  }, [token])
+  }, [token, selectedAmount])
 
   // handle mint change: recalculate allocation and error
   useEffect(() => {

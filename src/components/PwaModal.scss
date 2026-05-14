@@ -1,0 +1,99 @@
+.tollgate-captive-portal-pwa-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, .7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  backdrop-filter: blur(.4rem);
+}
+
+.tollgate-captive-portal-pwa-card {
+  position: relative;
+  background-color: #111;
+  border: .15rem solid rgba(255, 255, 255, .1);
+  border-radius: var(--border-radius-large);
+  padding: 2.5rem 2rem 2rem;
+  max-width: 34rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.tollgate-captive-portal-pwa-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  appearance: none;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, .5);
+  cursor: pointer;
+  padding: .2rem;
+  width: auto;
+
+  &:hover {
+    color: var(--color-white);
+  }
+}
+
+.tollgate-captive-portal-pwa-icon {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1rem;
+}
+
+.tollgate-captive-portal-pwa-title {
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.tollgate-captive-portal-pwa-subtitle {
+  font-size: var(--font-size-small);
+  color: rgba(255, 255, 255, .6);
+  line-height: 1.4;
+}
+
+.tollgate-captive-portal-pwa-steps {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  width: 100%;
+  margin-top: .5rem;
+}
+
+.tollgate-captive-portal-pwa-step {
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+
+  &-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background-color: #f60;
+    color: var(--color-white);
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &-content {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: var(--font-size-small);
+    color: rgba(255, 255, 255, .8);
+    padding-top: .2rem;
+  }
+}
