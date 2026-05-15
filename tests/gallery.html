@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>net4sats Captive Portal - Test Gallery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0f1e; color: #e0e0e0; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #f60; }
+    h2 { font-size: 1.4rem; margin: 2rem 0 1rem; color: #f60; border-bottom: 1px solid #222; padding-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem; color: #ccc; }
+    p.subtitle { color: #888; margin-bottom: 2rem; }
+    .section { margin-bottom: 3rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: #111827; border-radius: 12px; overflow: hidden; border: 1px solid #1e293b; }
+    .card img { width: 100%; display: block; }
+    .card video { width: 100%; display: block; }
+    .card .label { padding: 0.75rem 1rem; font-size: 0.85rem; color: #94a3b8; border-top: 1px solid #1e293b; }
+    .video-card video { aspect-ratio: 390/844; object-fit: contain; background: #000; }
+    a { color: #f60; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { display: inline-block; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>net4sats Captive Portal</h1>
+  <p class="subtitle">Test gallery — screenshots &amp; video walkthroughs</p>
+
+  <a class="back" href="./">&#8592; Back to Captive Portal</a>
+
+  <div class="section">
+    <h2>Screenshots</h2>
+    <h3>Initial Load &amp; PWA Modal</h3>
+    <div class="grid">
+      <div class="card">
+        <img src="screenshots/01-initial-load.png" alt="Initial load with PWA modal" loading="lazy">
+        <div class="label">01 — Initial load (PWA modal)</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/02-cashu-tab-clean.png" alt="Cashu tab clean" loading="lazy">
+        <div class="label">02 — Cashu tab (modal dismissed)</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/03-lightning-tab-clean.png" alt="Lightning tab clean" loading="lazy">
+        <div class="label">03 — Lightning tab</div>
+      </div>
+    </div>
+
+    <h3>Size Selector</h3>
+    <div class="grid">
+      <div class="card">
+        <img src="screenshots/04-cashu-15min-selected.png" alt="15 min selected" loading="lazy">
+        <div class="label">04 — 15 min preset selected</div>
+      </div>
+    </div>
+
+    <h3>Cashu Payment Flow</h3>
+    <div class="grid">
+      <div class="card">
+        <img src="screenshots/05-cashu-valid-token.png" alt="Valid token" loading="lazy">
+        <div class="label">05 — Valid Cashu token (420 sats)</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/06-cashu-insufficient-funds.png" alt="Insufficient funds" loading="lazy">
+        <div class="label">06 — Insufficient funds (CU002)</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/cashu-processing.png" alt="Processing" loading="lazy">
+        <div class="label">Processing payment</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/cashu-access-granted.png" alt="Access granted" loading="lazy">
+        <div class="label">Access granted</div>
+      </div>
+    </div>
+
+    <h3>Lightning Payment Flow</h3>
+    <div class="grid">
+      <div class="card">
+        <img src="screenshots/07-lightning-invoice.png" alt="Lightning invoice" loading="lazy">
+        <div class="label">07 — Lightning invoice (QR code)</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/lightning-processing.png" alt="Processing" loading="lazy">
+        <div class="label">Requesting invoice</div>
+      </div>
+      <div class="card">
+        <img src="screenshots/08-lightning-access-granted.png" alt="Access granted" loading="lazy">
+        <div class="label">08 — Access granted</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Video Walkthroughs</h2>
+    <div class="grid">
+      <div class="card video-card">
+        <video controls preload="metadata" poster="screenshots/02-cashu-tab-clean.png">
+          <source src="videos/cashu-flow.webm" type="video/webm">
+        </video>
+        <div class="label">Cashu complete flow — size selection, token validation, mint selection, purchase, access granted</div>
+      </div>
+      <div class="card video-card">
+        <video controls preload="metadata" poster="screenshots/03-lightning-tab-clean.png">
+          <source src="videos/lightning-flow.webm" type="video/webm">
+        </video>
+        <div class="label">Lightning complete flow — amount adjustment, invoice generation, QR code, access granted</div>
+      </div>
+      <div class="card video-card">
+        <video controls preload="metadata" poster="screenshots/01-initial-load.png">
+          <source src="videos/ui-exploration.webm" type="video/webm">
+        </video>
+        <div class="label">UI exploration — PWA modal, size presets, custom input, tab switching, footer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Test Suite Summary</h2>
+    <p style="margin-bottom: 1rem; color: #94a3b8;">61 Playwright tests, all passing</p>
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr style="border-bottom: 1px solid #222; text-align: left;">
+          <th style="padding: 0.5rem; color: #f60;">Suite</th>
+          <th style="padding: 0.5rem; color: #f60;">Tests</th>
+          <th style="padding: 0.5rem; color: #f60;">Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 0.5rem;">smoke</td><td style="padding: 0.5rem;">8</td><td style="padding: 0.5rem;">Load, title, banner, logo, tabs, MAC, footer, size selector</td></tr>
+        <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 0.5rem;">cashu-flow</td><td style="padding: 0.5rem;">15</td><td style="padding: 0.5rem;">CU101/CU102/CU002 errors, valid token, mint selection, purchase, access granted</td></tr>
+        <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 0.5rem;">lightning-flow</td><td style="padding: 0.5rem;">11</td><td style="padding: 0.5rem;">Amount input, +/-, invoice QR, wallet/copy, cancel, auto-grant</td></tr>
+        <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 0.5rem;">ui-components</td><td style="padding: 0.5rem;">12</td><td style="padding: 0.5rem;">Size presets, custom input, PWA modal, tabs, language, footer, banner</td></tr>
+        <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 0.5rem;">accessibility</td><td style="padding: 0.5rem;">6</td><td style="padding: 0.5rem;">Alt text, aria-labels, accessible names, keyboard nav, focus</td></tr>
+        <tr><td style="padding: 0.5rem;">screenshots</td><td style="padding: 0.5rem;">8</td><td style="padding: 0.5rem;">8 named key-state screenshots</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

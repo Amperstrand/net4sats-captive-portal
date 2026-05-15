@@ -27,6 +27,12 @@ jobs:
         env:
           VITE_MOCK: true
           VITE_BASE_PATH: /net4sats-captive-portal/
+      - name: Copy gallery assets
+        run: |
+          mkdir -p build/gallery/screenshots build/gallery/videos
+          cp tests/gallery.html build/gallery/index.html
+          cp tests/screenshots/*.png build/gallery/screenshots/
+          cp tests/videos/*.webm build/gallery/videos/ 2>/dev/null || true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

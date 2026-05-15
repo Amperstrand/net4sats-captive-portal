@@ -14,7 +14,7 @@ module.exports = defineConfig({
     baseURL: 'http://localhost:5173/',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'off',
+    video: 'retain-on-failure',
     actionTimeout: 10000,
   },
   projects: [
@@ -23,6 +23,15 @@ module.exports = defineConfig({
       use: {
         browserName: 'chromium',
         viewport: { width: 390, height: 844 },
+      },
+    },
+    {
+      name: 'video',
+      testMatch: 'tests/video-walkthrough.spec.js',
+      use: {
+        browserName: 'chromium',
+        viewport: { width: 390, height: 844 },
+        video: 'on',
       },
     },
   ],
