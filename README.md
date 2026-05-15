@@ -120,3 +120,59 @@ The hardcoded mock data (used for development) should be updated regularly to ma
 
 This project is licensed under the GPLv3 License.
 
+---
+
+## net4sats Fork
+
+This is a themed fork of the TollGate captive portal for [net4sats](https://amperstrand.github.io/net4sats-captive-portal/) — internet for Bitcoin satoshis. The theming system (`theme.config.js` + `ThemeProvider`) allows rebranding without modifying TollGate protocol logic.
+
+### Theming
+
+Edit `theme.config.js` to change brand name, colors, logo, and background:
+
+```js
+module.exports = {
+  brand: {
+    name: 'net4sats',
+    tagline: 'Internet for Bitcoiners',
+    logo: '/net4sats-logo.svg',
+  },
+  colors: {
+    cta: '#f60',
+    brandBg: '#080e1d',
+  },
+}
+```
+
+### Demo Mode
+
+Build with `VITE_MOCK=true` to get a self-contained demo that works on GitHub Pages without a backend:
+
+```bash
+VITE_MOCK=true npm run build
+```
+
+All mock code is gated behind `import.meta.env.VITE_MOCK` and tree-shaken from production builds.
+
+### Router Deployment
+
+Deploy the captive portal to an OpenWrt router:
+
+```bash
+npm run build
+./scripts/deploy-to-router.sh 192.168.1.1
+```
+
+The script copies `build/` to `/www/` on the router and configures nodogsplash. Requires SSH access and nodogsplash installed.
+
+For the full end-to-end setup:
+1. Flash OpenWrt onto the router (e.g. via [conwrt](https://github.com/Amperstrand/conwrt))
+2. Install and configure [TollGate backend](https://github.com/OpenTollGate/tollgate-module-basic-go)
+3. Run `./scripts/deploy-to-router.sh` to deploy the portal frontend
+4. Connect a client to WiFi — nodogsplash redirects to the portal automatically
+
+### Live Demo
+
+- Portal: https://amperstrand.github.io/net4sats-captive-portal/
+- Gallery: https://amperstrand.github.io/net4sats-captive-portal/gallery/
+
