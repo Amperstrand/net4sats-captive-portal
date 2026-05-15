@@ -130,6 +130,15 @@ export const validateToken = (token = "", mint, i18n) => {
 
 // submit a cashu token to the tollgate backend for payment
 export const submitToken = async (token, tollgateDetails, allocation, i18n) => {
+  if (import.meta.env.VITE_MOCK) {
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    return {
+      status: 1,
+      label: i18n("access_granted_title"),
+      message: i18n("access_granted_subtitle", { purchased: allocation }),
+    };
+  }
+
   try {
     // get tollgate pubkey from event
     const tollgatePubkey = tollgateDetails.detailsEvent.pubkey;
