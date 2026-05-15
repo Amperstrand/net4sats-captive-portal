@@ -46,6 +46,7 @@ function generateAssetManifestPlugin() {
 
 export default defineConfig({
   plugins: [react(), generateAssetManifestPlugin()],
+  base: process.env.VITE_BASE_PATH || '/',
   build: {
     outDir: "build",
     rollupOptions: {
