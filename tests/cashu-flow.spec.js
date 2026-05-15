@@ -92,8 +92,7 @@ test.describe('Cashu Payment Flow', () => {
       }
     }
 
-    const isEnabled = await cashu.isPurchaseEnabled();
-    expect(isEnabled).toBe(true);
+    await cashu.waitForPurchaseEnabled();
   });
 
   test('select 210sat mint: no error, purchase button enables', async () => {
@@ -111,8 +110,7 @@ test.describe('Cashu Payment Flow', () => {
     }
 
     expect(await cashu.isErrorVisible()).toBe(false);
-    const isEnabled = await cashu.isPurchaseEnabled();
-    expect(isEnabled).toBe(true);
+    await cashu.waitForPurchaseEnabled();
   });
 
   test('click purchase: processing state shows', async () => {
@@ -148,10 +146,12 @@ test.describe('Cashu Payment Flow', () => {
       }
     }
 
+    await page.route('**/balance.html', route => route.fulfill({ status: 200, body: '<html><body>Balance page</body></html>', contentType: 'text/html' }));
     await cashu.clickPurchase();
     await expect(cashu.getAccessGranted()).toBeVisible({ timeout: 15000 });
     const title = await page.locator('.tollgate-captive-portal-access-granted h2').textContent();
     expect(title).toContain('successful');
+    await page.waitForTimeout(700);
     await page.screenshot({ path: 'tests/screenshots/cashu-access-granted.png' });
   });
 
@@ -190,6 +190,7 @@ test.describe('Cashu Payment Flow', () => {
       }
     }
 
+    await cashu.waitForPurchaseEnabled();
     const alloc = await cashu.getTokenAllocation().textContent();
     expect(alloc.length).toBeGreaterThan(0);
   });

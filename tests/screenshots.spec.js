@@ -83,13 +83,15 @@ test.describe('Screenshot Capture', () => {
 
   test('08-lightning-access-granted', async ({ browser }) => {
     const page = await browser.newPage();
+    await page.route('**/balance.html', route => route.fulfill({ status: 200, body: '<html><body>Balance page</body></html>', contentType: 'text/html' }));
     const lightning = new LightningPage(page);
     await lightning.navigate();
     await lightning.switchToLightning();
     await lightning.clickPurchase();
     await expect(page.locator('.tollgate-captive-portal-method-invoice')).toBeVisible({ timeout: 15000 });
     await expect(lightning.isAccessGranted()).toBeVisible({ timeout: 10000 });
-    await page.screenshot({ path: 'tests/screenshots/08-lightning-access-granted.png', fullPage: true });
+    await page.waitForTimeout(700);
+    await page.screenshot({ path: 'tests/screenshots/08-lightning-access-granted.png' });
     await page.close();
   });
 });
