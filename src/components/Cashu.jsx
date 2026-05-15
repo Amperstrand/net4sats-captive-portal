@@ -8,6 +8,7 @@ import DeviceInfo from './DeviceInfo';
 import { Error, Success } from './Status';
 import { Processing, AccessGranted, AccessOptions } from '../App'
 import { CancelIcon } from './Icon'
+import { useToast } from './ToastContext';
 
 // helpers
 import { requestScanQr } from '../helpers/qr-code';
@@ -22,6 +23,7 @@ import './Cashu.scss'
 export const Cashu = (props) => {
   const { t } = useTranslation();
   const { tollgateDetails, selectedAmount } = props;
+  const { addToast } = useToast();
   // state for user input and payment flow
   const [token, setToken] = useState('');
   const [tokenValue, setTokenValue] = useState(null);
@@ -67,6 +69,9 @@ export const Cashu = (props) => {
       } else {
         setTokenValue(validation.value)
         setAllocation(calculateAllocation(validation.value.amount, selectedMint, t))
+        if (import.meta.env.VITE_MOCK) {
+          addToast('Token validated (demo) — ' + validation.value.amount + ' sats, ' + validation.value.proofCount + ' proofs', 'success')
+        }
         if (validation.value.amount < requiredAmount) {
           setError({
             status: 0,
@@ -74,6 +79,9 @@ export const Cashu = (props) => {
             label: t('CU002_label'),
             message: t('CU002_message')
           })
+          if (import.meta.env.VITE_MOCK) {
+            addToast('Insufficient funds (demo) — token has ' + validation.value.amount + ' sats, need ' + requiredAmount, 'warning')
+          }
         } else {
           setError(null)
         }
@@ -105,12 +113,19 @@ export const Cashu = (props) => {
   // handle processing state: submit token and handle result
   useEffect(() => {
     if (processing) {
+      if (import.meta.env.VITE_MOCK) {
+        addToast('Submitting payment to TollGate (demo)...', 'info')
+      }
+
       const submit = async () => {
         const response = await submitToken(token, tollgateDetails, allocation, t);
         setProcessing(false);
 
         if (response.status) {
           setSuccess(true);
+          if (import.meta.env.VITE_MOCK) {
+            addToast('Payment accepted! Internet access granted (demo)', 'success')
+          }
         } else {
           setError(response)
         }

@@ -6,6 +6,9 @@ import Cashu from './components/Cashu.jsx'
 import Lightning from './components/Lightning.jsx'
 import SizeSelector from './components/SizeSelector.jsx'
 import PwaModal from './components/PwaModal.jsx'
+import DemoBanner from './components/DemoBanner.jsx'
+import ToastContainer from './components/Toast.jsx'
+import { useToast } from './components/ToastContext';
 import { Error } from './components/Status.jsx';
 import { AccessGrantedIcon, RadioButtonIcon } from './components/Icon.jsx'
 import { fetchTollgateData, getStepSizeValues } from './helpers/tollgate.js'
@@ -90,6 +93,7 @@ export const App = () => {
   return (
     <div id="tollgate-captive-portal" className="tollgate-captive-portal">
       <Background />
+      <DemoBanner />
 
       <div className="tollgate-captive-portal-interface">
         {theme.features.pwaModal && <PwaModal />}
@@ -127,6 +131,7 @@ export const App = () => {
         <Footer />
       </div>
 
+      <ToastContainer />
     </div>
   );
 }
@@ -183,11 +188,16 @@ export const Processing = ({ label }) => {
 // shows access granted message if payment succeeded
 export const AccessGranted = ({ allocation }) => {
   const { t } = useTranslation();
+  const { addToast } = useToast();
   const [showOpenBalanceButton, setShowOpenBalanceButton] = useState(false);
   const balanceUrl = '/balance.html';
 
   // Redirect to the balance page shortly after a successful payment.
   useEffect(() => {
+    if (import.meta.env.VITE_MOCK) {
+      addToast('Redirecting to balance page (demo)...', 'info');
+    }
+
     const timer = setTimeout(() => {
       try {
         window.location.assign(balanceUrl);

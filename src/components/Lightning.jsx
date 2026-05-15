@@ -8,6 +8,7 @@ import DeviceInfo from './DeviceInfo';
 import { Error } from './Status';
 import { Processing, AccessGranted, AccessOptions } from '../App'
 import { CancelIcon } from './Icon'
+import { useToast } from './ToastContext';
 
 // helpers
 import { getAccessOptions, calculateAllocation } from '../helpers/tollgate';
@@ -22,6 +23,7 @@ import './Lightning.scss'
 export const Lightning = (props) => {
   const { t } = useTranslation();
   const { tollgateDetails, selectedAmount } = props;
+  const { addToast } = useToast();
   // state for payment flow and user input
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -78,6 +80,10 @@ export const Lightning = (props) => {
   // handle processing change
   useEffect(() => {
     if (processing && !invoiceData && selectedMint) {
+      if (import.meta.env.VITE_MOCK) {
+        addToast('Requesting Lightning invoice (demo)...', 'info')
+      }
+
       const request = async () => {
         const response = await requestInvoice(unitAmount, selectedMint.url, t);
 
@@ -87,6 +93,9 @@ export const Lightning = (props) => {
           if (response.status) {
             setError(null)
             setInvoiceData(response)
+            if (import.meta.env.VITE_MOCK) {
+              addToast('Invoice generated (demo) — ' + unitAmount + ' sats for ' + allocation.value + ' ' + allocation.unit, 'success')
+            }
           } else {
             setError(response)
           }
@@ -114,6 +123,9 @@ export const Lightning = (props) => {
         if (response.accessGranted) {
           setError(null)
           setSuccess(true)
+          if (import.meta.env.VITE_MOCK) {
+            addToast('Lightning payment detected! Access granted (demo)', 'success')
+          }
         }
       } else {
         setError(response)
