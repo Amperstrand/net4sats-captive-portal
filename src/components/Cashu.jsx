@@ -139,7 +139,7 @@ export const Cashu = (props) => {
   return (
     <div className="tollgate-captive-portal-method-cashu tollgate-captive-portal-method">
       {/* header: shows the portal title and a short description about cashu */}
-      {(!success && !processing) && <Header />}
+      {(!success && !processing) && <Header selectedAmount={selectedAmount} selectedMint={selectedMint} />}
 
       <div className="tollgate-captive-portal-method-content">
         {/* processing: displays a loading indicator and message while payment is being processed */}
@@ -162,7 +162,7 @@ export const Cashu = (props) => {
         {error && <Error label={error.label} code={error.code} message={error.message} />}
 
         {/* accessoptions: lets the user select from available access/pricing options */}
-        {(!success && !processing && accessOptions.length) && <div className="tollgate-captive-portal-method-options">
+        {(!success && !processing && accessOptions.length) && <div className="tollgate-captive-portal-method-options" aria-hidden="true">
           <h5>{t('access_options')}</h5>
           <AccessOptions
             pricingInfo={accessOptions}
@@ -201,10 +201,12 @@ export const Cashu = (props) => {
 }
 
 // cashu header component
-const Header = () => {
+const Header = ({ selectedAmount, selectedMint }) => {
   const { t } = useTranslation();
+  const displayAmount = selectedAmount || (selectedMint ? selectedMint.price : 0);
   return <div className="tollgate-captive-portal-method-header">
     <h1>{t('portal_title')}</h1>
+    <div className="sats-display">{displayAmount} sats</div>
     <h2><Trans i18nKey="provide_cashu" components={{ 1: <a href="https://cashu.space/" target="_blank" rel="noreferrer"></a> }} /></h2>
   </div>
 }

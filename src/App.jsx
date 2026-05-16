@@ -18,7 +18,7 @@ import './App.scss'
 export const App = () => {
   const { t, ready } = useTranslation();
   const theme = useTheme();
-  const [method, setMethod] = useState('cashu');
+  const [method, setMethod] = useState('lightning');
   const [tollgateDetails, setTollgateDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -100,17 +100,17 @@ export const App = () => {
         <Header />
 
         <div className="tollgate-captive-portal-content">
+          {!loading && !error && tollgateDetails && theme.features.sizeSelector && <SizeSelector
+            tollgateDetails={tollgateDetails.value}
+            selectedAmount={selectedAmount}
+            setSelectedAmount={setSelectedAmount}
+          />}
+
           <div className="tollgate-captive-portal-content-container">
 
-            {!loading && !error && tollgateDetails && theme.features.sizeSelector && <SizeSelector
-              tollgateDetails={tollgateDetails.value}
-              selectedAmount={selectedAmount}
-              setSelectedAmount={setSelectedAmount}
-            />}
-
             <div className="tollgate-captive-portal-tabs" aria-label={t('tab_aria_label')}>
-              <Tab type="cashu" method={method} setMethod={setMethod} />
               <Tab type="lightning" method={method} setMethod={setMethod} />
+              <Tab type="cashu" method={method} setMethod={setMethod} />
             </div>
 
             <div className="tollgate-captive-portal-view">
@@ -142,6 +142,7 @@ export const Header = () => {
 
   return <div className="tollgate-captive-portal-header">
     <img src={theme.brand.logo} alt={t('header_image_alt')}></img>
+    <p className="powered-by">Powered by <a href={theme.brand.poweredByUrl} target="_blank" rel="noreferrer">{theme.brand.poweredByText}</a></p>
   </div>
 }
 

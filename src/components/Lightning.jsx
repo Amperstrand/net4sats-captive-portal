@@ -143,7 +143,7 @@ export const Lightning = (props) => {
 
   return <div className="tollgate-captive-portal-method-lightning tollgate-captive-portal-method">
     {/* header: shows the portal title and a short description about lightning */}
-    {((!success && !processing) || (invoiceData && !success)) && <Header />}
+    {((!success && !processing) || (invoiceData && !success)) && <Header unitAmount={unitAmount} selectedMint={selectedMint} />}
 
     <div className="tollgate-captive-portal-method-content">
       {/* processing: displays a loading indicator and message while invoice is being requested */}
@@ -164,7 +164,7 @@ export const Lightning = (props) => {
       {error && <Error label={error.label} code={error.code} message={error.message} />}
 
       {/* accessoptions: lets the user select from available access/pricing options */}
-      {(!success && !processing && accessOptions.length && !invoiceData) && <div className="tollgate-captive-portal-method-options">
+      {(!success && !processing && accessOptions.length && !invoiceData) && <div className="tollgate-captive-portal-method-options" aria-hidden="true">
         <h5>{t('access_options')}</h5>
         <AccessOptions
           pricingInfo={accessOptions}
@@ -235,10 +235,12 @@ export const Lightning = (props) => {
 }
 
 // lightning header component
-const Header = () => {
+const Header = ({ unitAmount, selectedMint }) => {
   const { t } = useTranslation();
+  const displayAmount = unitAmount || (selectedMint ? selectedMint.price : 0);
   return <div className="tollgate-captive-portal-method-header">
     <h1>{t('portal_title')}</h1>
+    <div className="sats-display">{displayAmount} sats</div>
     <h2><Trans i18nKey="provide_lightning" components={{ 1: <a href="https://en.wikipedia.org/wiki/Lightning_Network" target="_blank" rel="noreferrer"></a> }} /></h2>
   </div>
 }

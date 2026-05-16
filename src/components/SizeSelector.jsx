@@ -88,9 +88,12 @@ const SizeSelector = ({ tollgateDetails, selectedAmount, setSelectedAmount }) =>
   if (!mode || !presets.length) return null;
 
   const unitLabel = mode === 'time' ? t('sat') : t('sat');
+  const minPurchase = presets.length ? presets[0].label : '';
 
   return (
     <div className="tollgate-captive-portal-size-selector">
+      <p className="tollgate-captive-portal-size-selector-heading">How much Internet would you like to buy?</p>
+      <p className="tollgate-captive-portal-size-selector-subheading">Minimum purchase: {minPurchase}</p>
       <div className="tollgate-captive-portal-size-selector-pills">
         {presets.map((preset, i) => (
           <button
