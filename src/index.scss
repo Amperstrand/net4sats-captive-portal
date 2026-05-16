@@ -16,7 +16,7 @@
   --color-black-transparent: rgba(0,0,0,0.90);
 
   --color: #fff;
-  --color-negative: #959CB1;
+  --color-negative: #b0b8cc;
   
   --color-cta: #f60;
   --color-cta-transparent: rgba(255, 102, 0, .8);
@@ -145,7 +145,8 @@ a.btn {
   text-align: center;
 
   &[disabled] {
-    opacity: .4;
+    opacity: .55;
+    background-color: #a0a0a0;
   }
 
   &:not([disabled]) {

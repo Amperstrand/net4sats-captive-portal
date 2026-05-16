@@ -99,14 +99,14 @@ export const App = () => {
         {theme.features.pwaModal && <PwaModal />}
         <Header />
 
-        {!loading && !error && tollgateDetails && theme.features.sizeSelector && <SizeSelector
-          tollgateDetails={tollgateDetails.value}
-          selectedAmount={selectedAmount}
-          setSelectedAmount={setSelectedAmount}
-        />}
-
         <div className="tollgate-captive-portal-content">
           <div className="tollgate-captive-portal-content-container">
+
+            {!loading && !error && tollgateDetails && theme.features.sizeSelector && <SizeSelector
+              tollgateDetails={tollgateDetails.value}
+              selectedAmount={selectedAmount}
+              setSelectedAmount={setSelectedAmount}
+            />}
 
             <div className="tollgate-captive-portal-tabs" aria-label={t('tab_aria_label')}>
               <Tab type="cashu" method={method} setMethod={setMethod} />

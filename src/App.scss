@@ -40,7 +40,7 @@
     max-width: 500px;
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: var(--border-radius-large);
-    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.5), 0 0.2rem 0.8rem rgba(0, 0, 0, 0.15);
     overflow: hidden;
   }
   
@@ -141,7 +141,7 @@
       button.cta,
       button.ghost {
         font-size: var(--font-size-small);
-        padding: .4rem;
+        padding: .6rem .8rem;
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
@@ -149,10 +149,19 @@
         column-gap: .4rem;
 
         &.active {
+          background-color: var(--color-cta);
+          color: var(--color-white);
+          border-color: var(--color-cta);
+
+          .mint-price {
+            background-color: transparent;
+            color: var(--color-white);
+          }
+
           .mint-meta-address,
           .mint-meta-price-per-step {
-            background-color: var(--color-white-transparent);
-            color: var(--color-cta);
+            background-color: rgba(255, 255, 255, .2);
+            color: var(--color-white);
           }
         }
       }
