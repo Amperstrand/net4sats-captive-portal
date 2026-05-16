@@ -9,7 +9,10 @@ const PwaModal = () => {
   useEffect(() => {
     const seen = sessionStorage.getItem('pwa-seen');
     if (!seen) {
-      setVisible(true);
+      const timer = setTimeout(() => {
+        setVisible(true);
+      }, 15000);
+      return () => clearTimeout(timer);
     }
   }, []);
 

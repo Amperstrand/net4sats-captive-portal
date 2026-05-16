@@ -91,9 +91,6 @@ const SizeSelector = ({ tollgateDetails, selectedAmount, setSelectedAmount }) =>
 
   return (
     <div className="tollgate-captive-portal-size-selector">
-      <h1 className="tollgate-captive-portal-size-selector-heading">
-        How much Internet would you like to buy?
-      </h1>
       <div className="tollgate-captive-portal-size-selector-pills">
         {presets.map((preset, i) => (
           <button

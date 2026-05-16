@@ -12,7 +12,7 @@ class CaptivePortalPage {
   async navigateWithPwaModal() {
     await this.page.goto('/');
     await this.waitForLoad();
-    await this.page.waitForSelector('.tollgate-captive-portal-pwa-overlay', { timeout: 10000 });
+    await this.page.waitForSelector('.tollgate-captive-portal-pwa-overlay', { timeout: 20000 });
   }
 
   async waitForLoad() {
