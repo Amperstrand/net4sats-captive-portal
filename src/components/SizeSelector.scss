@@ -24,25 +24,25 @@
   &-pill {
     appearance: none;
     padding: .6rem 1.4rem;
-    border-radius: 5rem;
-    border: .15rem solid var(--color-gray);
-    background-color: var(--color-gray-transparent);
-    color: var(--color-black);
+    border-radius: 5rem !important;
+    border: .15rem solid var(--color-gray) !important;
+    background-color: var(--color-gray-transparent) !important;
+    color: var(--color-black) !important;
     font-size: var(--font-size-small);
     font-weight: 500;
     cursor: pointer;
     transition: background-color .15s, border-color .15s, color .15s;
-    width: auto;
+    width: auto !important;
 
     &:hover {
-      background-color: rgba(255, 102, 0, .1);
-      border-color: rgba(255, 102, 0, .3);
+      background-color: rgba(255, 102, 0, .1) !important;
+      border-color: rgba(255, 102, 0, .3) !important;
     }
 
     &.active {
-      background-color: var(--color-cta);
-      border-color: var(--color-cta);
-      color: var(--color-white);
+      background-color: var(--color-cta) !important;
+      border-color: var(--color-cta) !important;
+      color: var(--color-white) !important;
       font-weight: 600;
     }
   }
